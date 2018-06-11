@@ -1,5 +1,6 @@
 package net.azurewebsites.teamrit.conklusion.decider
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -10,9 +11,10 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,6 +22,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+        }
+
+        decide.setOnClickListener {view->
+            val list = arrayListOf<String>()
+            list.addAll(listOf("mexican","chinese","mcDonald's","kfc","harvey's"))
+            val t = Random().nextInt(list.size)
+
+            val fadeOut = ObjectAnimator.ofFloat(answer, "alpha", 1f,0f)
+            val fadeIn = ObjectAnimator.ofFloat(answer, "alpha", 0f,1f)
+            fadeIn.setDuration(1000)
+            fadeOut.setDuration(1000)
+
+            fadeOut.start()
+            answer.text = list[t]
+            fadeIn.start()
+
+            Snackbar.make(view, "Your random variable is ${list[t]}", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
 
