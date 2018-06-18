@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
-            setContentView(R.layout.activity_main)
+            setContentView(R.layout.show_options)
         }
 
         decide.setOnClickListener {view->
